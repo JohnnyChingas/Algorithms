@@ -46,17 +46,32 @@ class Node:
         else:
             return self.data
 
+    def min(self):
+        if self.left is not None:
+            return self.left.min() 
+        else:
+            return self.data
+                
+    def max(self):
+        if self.right is not None:
+            return self.right.max()
+        else:
+            return self.data
+
 def main():
     root = Node(8)
     data_list = [3,10,1,6,4,7,14,13]
     for d in data_list:
         root.insert(d)
+    """
     print root.search(14)
     print root.search(1)
     print root.search(7)
     print root.search(9)
     print root.search(None)
-
+    """
+    print root.min()
+    print root.max()
 
 if __name__ == '__main__':
     main()
