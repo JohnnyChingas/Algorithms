@@ -92,13 +92,21 @@ def main():
     data_list = [3,10,1,6,4,7,14,13]
     for d in data_list:
         root.insert(d)
-    print root.search(14)
-    print root.search(1)
-    print root.search(7)
-    print root.search(9)
-    print root.search(None)
-    print root.min()
-    print root.max()
+    node, parent = root.search(14)
+    print node.data
+    print parent.data
+    node, parent =  root.search(1)
+    print node.data
+    print parent.data
+    node, parent =  root.search(7)
+    print node.data
+    print parent.data
+    node, parent =  root.search(9)
+    node, parent =  root.search(None)
+    node =  root.min()
+    print node.data
+    node =  root.max()
+    print node.data
 
     root.traverse()
     delete_node = 14
