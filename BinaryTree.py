@@ -7,8 +7,10 @@ class Node:
     """
     
     def __init__(self, data):
-        #Node initiator
-        #@param data node data object
+        """
+        Node initiator
+        @param data node data object
+        """
         self.left = None
         self.right = None
         self.data = data
@@ -34,7 +36,7 @@ class Node:
         """
         Search tree for data
         @param data object
-        returns object containing data
+        returns object containing data, and its parent
         """
         if data < self.data:
             if self.left is None:
