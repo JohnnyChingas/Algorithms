@@ -61,12 +61,12 @@ class Node:
         else:
             return self
 
-    def traverse(self):
+    def traverse(self, sorted_list = []):
         if self.left is not None:
-            self.left.traverse()
-        print self.data
+            self.left.traverse(sorted_list)
+        sorted_list.append(self.data)
         if self.right is not None:
-            self.right.traverse()
+            self.right.traverse(sorted_list)
 
     def parent(self,data):
         # write this
@@ -90,6 +90,7 @@ class Node:
             headNode.left, headNode.right = None, None
 
 def main():
+
     root = Node(8)
     data_list = [3,10,1,6,4,7,14,13]
     for d in data_list:
@@ -115,7 +116,9 @@ def main():
     print "deleting node ",delete_node
     root.delete(delete_node)
     root.traverse()
-
+    sorted_list=[]
+    root.traverse(sorted_list)
+    print sorted_list
 
 if __name__ == '__main__':
     main()
