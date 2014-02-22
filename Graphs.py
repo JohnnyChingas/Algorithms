@@ -1,7 +1,7 @@
 # Graph using adjacency lists
 # T. Melano
 
-MAXV = 1000
+MAXV = 100
 
 class Edgenode:
     def __init__(self, y = None, weight = None, next = None):
@@ -30,11 +30,10 @@ class Graph:
         self.nedges = nedges
         self.directed = directed
 
-
 def initialize_graph(graph, directed):
     """
-    @param: graph is Graph object
-    @param: directed is a boolean
+    @param graph: Graph object
+    @param directed: boolean
     """
     graph.nvertices = 0
     graph.nedges = 0
@@ -43,6 +42,12 @@ def initialize_graph(graph, directed):
     for i in xrange(MAXV):
         graph.degree[i] = 0
         graph.edges[i] = None
+
+def read_graph(graph, directed):
+    """
+    @param graph: Graph object
+    @param directed: boolean
+    """
 
 def graph_data():
     data = [
