@@ -48,6 +48,12 @@ def read_graph(graph, directed):
     @param graph: Graph object
     @param directed: boolean
     """
+    initialize_graph(graph, directed)
+    data = graph_data()
+    
+    graph.nvertices = data[0][0] # number of vertices
+    m = data[0][1] # number of edges
+
 
 def graph_data():
     data = [
