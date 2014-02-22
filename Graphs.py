@@ -54,6 +54,18 @@ def read_graph(graph, directed):
     graph.nvertices = data[0][0] # number of vertices
     m = data[0][1] # number of edges
 
+    for i in xrange(1,m+1):
+        x = data[i][0] # vertex x
+        y = data[i][1] # vertex y
+        insert_edge(graph,x,y,directed)
+
+def insert_edge(graph, x, y, directed)
+    """
+    @param graph: Graph object
+    @param directed: boolean
+    @param x, y: vertices in edge (x,y)
+    """
+
 
 def graph_data():
     data = [
