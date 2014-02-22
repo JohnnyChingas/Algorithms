@@ -62,9 +62,22 @@ def read_graph(graph, directed):
 def insert_edge(graph, x, y, directed)
     """
     @param graph: Graph object
-    @param directed: boolean
     @param x, y: vertices in edge (x,y)
+    @param directed: boolean
     """
+    p = Edgenode
+    p.y = y
+    p.next = graph.edges[x]
+
+    graph.edges[x] = p
+
+    graph.degree[x] += 1
+
+    if (directed == False):
+        insert_edge(graph, y, x, True)
+    else:
+        g.nedges += 1
+
 
 
 def graph_data():
