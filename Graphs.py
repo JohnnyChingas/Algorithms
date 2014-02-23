@@ -59,13 +59,13 @@ def read_graph(graph, directed):
         y = data[i][1] # vertex y
         insert_edge(graph,x,y,directed)
 
-def insert_edge(graph, x, y, directed)
+def insert_edge(graph, x, y, directed):
     """
     @param graph: Graph object
     @param x, y: vertices in edge (x,y)
     @param directed: boolean
     """
-    p = Edgenode
+    p = Edgenode()
     p.y = y
     p.next = graph.edges[x]
 
@@ -77,6 +77,19 @@ def insert_edge(graph, x, y, directed)
         insert_edge(graph, y, x, True)
     else:
         g.nedges += 1
+
+
+def print_graph(graph):
+    """
+    @param graph: Graph object
+    """
+    for i in xrange(graph.nvertices):
+        print "%d: "%i,
+        p = g.edges[i]
+        while p != None:
+            print " %d"%p.y
+            p = p.next
+        print "\n"
 
 
 
@@ -92,3 +105,11 @@ def graph_data():
             (3,4)]
     return data
 
+def main():
+    graph = Graph()
+    read_graph(graph, True)
+    print_graph(graph)
+
+
+if __name__ == "__main__":
+    main()
