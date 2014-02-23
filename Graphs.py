@@ -40,8 +40,8 @@ def initialize_graph(graph, directed):
     graph.directed = directed
 
     for i in xrange(MAXV):
-        graph.degree[i] = 0
-        graph.edges[i] = None
+        graph.degree.append(0)
+        graph.edges.append(None)
 
 def read_graph(graph, directed):
     """
@@ -67,25 +67,25 @@ def insert_edge(graph, x, y, directed):
     """
     p = Edgenode()
     p.y = y
-    p.next = graph.edges[x]
+    p.next = graph.edges[x] #p.next point to whatever is in edges[x] 
 
-    graph.edges[x] = p
+    graph.edges[x] = p #edges[x], gets replaced by the new p, which points to whatever was in edges[x] before
 
     graph.degree[x] += 1
 
     if (directed == False):
         insert_edge(graph, y, x, True)
     else:
-        g.nedges += 1
+        graph.nedges += 1
 
 
 def print_graph(graph):
     """
     @param graph: Graph object
     """
-    for i in xrange(graph.nvertices):
+    for i in xrange(1,graph.nvertices+1):
         print "%d: "%i,
-        p = g.edges[i]
+        p = graph.edges[i]
         while p != None:
             print " %d"%p.y
             p = p.next
@@ -107,8 +107,9 @@ def graph_data():
 
 def main():
     graph = Graph()
-    read_graph(graph, True)
+    read_graph(graph, False)
     print_graph(graph)
+    return graph
 
 
 if __name__ == "__main__":
