@@ -16,10 +16,13 @@ class SmartStack:
             self.min.append(x)
 
     def stack_pop(self):
-        x = self.stack.pop()
-        if x == self.stack_min():
-            self.min.pop()
-        return x
+        if len(self.stack) != 0:
+            x = self.stack.pop()
+            if x == self.stack_min():
+                self.min.pop()
+            return x
+        else:
+            print "Stack is empty, no longer pop-able"
 
     def stack_min(self):
         if len(self.min) != 0:
@@ -55,11 +58,38 @@ def test2():
     print stack.stack
     print stack.stack_min()
 
+def test3():
+    stack = SmartStack()
+    stack.stack_push(-1)
+    stack.stack_push(1)
+    stack.stack_push(1)
+    print "Print stack and stack minimum"
+    print stack.stack
+    print stack.stack_min()
+    print "Pop from stack, print stack and stack minimum"
+    print stack.stack_pop()
+    print stack.stack
+    print stack.stack_min()
+    print "Pop from stack, print stack and stack minimum"
+    print stack.stack_pop()
+    print stack.stack
+    print stack.stack_min()
+    print "Pop from stack, print stack and stack minimum"
+    print stack.stack_pop()
+    print stack.stack
+    print stack.stack_min()
+    print "Pop from stack, print stack and stack minimum"
+    print stack.stack_pop()
+    print stack.stack
+    print stack.stack_min()
+
 def main():
     print "Running test1"
     test1()
     print "Running test2"
     test2()
+    print "Running test3"
+    test3()
 
 if __name__ == "__main__":
     main()
