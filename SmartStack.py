@@ -10,7 +10,7 @@ class SmartStack:
     def stack_push(self,x):
         self.stack.append(x)
         if len(self.min) != 0:
-            if x < self.stack_min():
+            if x <= self.stack_min():
                 self.min.append(x)
         else:
             self.min.append(x)
@@ -22,9 +22,10 @@ class SmartStack:
         return x
 
     def stack_min(self):
-        return self.min[-1]
+        if len(self.min) != 0:
+            return self.min[-1]
 
-def main():
+def test1():
     print "Push elements to the stack"
     list = range(10)
     stack = SmartStack()
@@ -41,6 +42,24 @@ def main():
     print stack.stack_pop()
     print stack.stack
     print stack.stack_min()
+
+def test2():
+    stack = SmartStack()
+    stack.stack_push(1)
+    stack.stack_push(1)
+    print "Print stack and stack minimum"
+    print stack.stack
+    print stack.stack_min()
+    print "Pop from stack, print stack and stack minimum"
+    print stack.stack_pop()
+    print stack.stack
+    print stack.stack_min()
+
+def main():
+    print "Running test1"
+    test1()
+    print "Running test2"
+    test2()
 
 if __name__ == "__main__":
     main()
