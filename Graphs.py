@@ -1,6 +1,8 @@
 # Graph using adjacency lists
 # T. Melano
 
+from collections import deque
+
 MAXV = 100
 
 class Edgenode:
@@ -84,7 +86,7 @@ def print_graph(graph):
     @param graph: Graph object
     """
     for i in xrange(1,graph.nvertices+1):
-        print "%d: "%i,
+        print "%d:\n"%i,
         p = graph.edges[i]
         while p != None:
             print " %d"%p.y
@@ -105,12 +107,56 @@ def graph_data():
             (3,4)]
     return data
 
+
+# Breadth First Search methods
+processed = [None]*MAXV # boolean list of which vertices have been processed
+discovered = [None]*MAXV # boolean list of which vertices have been found
+parent = [None]*MAXV # integer list of discovery relation
+
+def initialize_search(graph):
+    for i in xrange(1,graph.nvertices+1):
+        processed[i] = discovered[i] = False
+        parent[i] = -1
+
+def bfs(graph, start):
+    q = deque([]) # queue of vertices to visit
+
+    q.append(start) 
+    discovered[start] = True
+
+    while len(q) != 0:
+        v = q.popleft()
+        process_vertex_early(v) # define this
+        processed[v] = True
+        p = graph.edges[v]
+        while p != None:
+            y = p.y
+            if ((processed[y] == False) or graph.directed):
+                process_edge(v,y) # define this
+            if (discovered[y] == False):
+                q.append(y)
+                discovered[y] = True
+                parent[y] = v
+            p = p.next
+        process_vertex_late(v) # define this
+    print "parent\n",parent
+
+def process_vertex_late(v):
+    return True
+
+def process_vertex_early(v):
+    print "processed vertex %d\n"%v
+
+def process_edge(x,y):
+    print "processed edge (%d,%d)\n"%(x,y)
+
 def main():
     graph = Graph()
     read_graph(graph, False)
     print_graph(graph)
+    initialize_search(graph)
+    bfs(graph,1)
     return graph
-
 
 if __name__ == "__main__":
     main()
