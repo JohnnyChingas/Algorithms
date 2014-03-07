@@ -113,7 +113,7 @@ processed = [None]*MAXV # boolean list of which vertices have been processed
 discovered = [None]*MAXV # boolean list of which vertices have been found
 parent = [None]*MAXV # integer list of discovery relation
 
-def initialize_search(graph):
+def initialize_bfs_search(graph):
     for i in xrange(1,graph.nvertices+1):
         processed[i] = discovered[i] = False
         parent[i] = -1 # the parent of vertex i is parent[i]
@@ -171,7 +171,7 @@ def find_path(start,end,parents):
 def connected_components(graph):
     # count the number of connected components in a graph
 
-    initialize_search(graph)
+    initialize_bfs_search(graph)
     
     c = 0 # Component number 
 
@@ -181,13 +181,55 @@ def connected_components(graph):
             bfs(graph,i)
             print "Component %d"%c
 
+# Depth First Search methods
+# Global variables
+finished = False
+time = 0
+
+def initialize_dfs_search(graph):
+    finished = False
+    time = 0
+    for i in xrange(1,graph.nvertices+1):
+        processed[i] = discovered[i] = False
+        parent[i] = -1 # the parent of vertex i is parent[i]
+        entry_time[i] = exit_time[i] = None
+
+def dfs(graph,v):
+    if finished: #allow for search termination
+        return
+    discovered[v] = True
+    time = time + 1
+    entry_time[v] = time
+
+    process_vertex_early_dfs(v)
+
+    p = graph.edges[v]
+    while p != None:
+        y = p.y
+        if discovered[y] == False:
+            parent[y] = v
+            process_edge_dfs(v,y)
+            dfs(graph,y)
+        elif not processed[y] or graph.directed:
+            process_edge_dfs(v,y)
+        if finished:
+            return
+        p = p.next
+
+    process_vertex_late_dfs(v)
+
+    time = time +1
+    exit_time[v] = time
+
+    processed[v] = True
+
 def main():
     graph = Graph()
     read_graph(graph, False)
     print_graph(graph)
     start = 1
     end = 4
-    initialize_search(graph)
+    initialize_bfs_search(graph)
     parent = bfs(graph,start)
 
     print "Path from %d to %d"%(start,end)
