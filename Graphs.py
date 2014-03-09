@@ -181,52 +181,14 @@ def connected_components(graph):
             bfs(graph,i)
             print "Component %d"%c
 
-# Depth First Search methods
-# Global variables
-finished = False
-time = 0
-
-def initialize_dfs_search(graph):
-    finished = False
-    time = 0
-    for i in xrange(1,graph.nvertices+1):
-        processed[i] = discovered[i] = False
-        parent[i] = -1 # the parent of vertex i is parent[i]
-        entry_time[i] = exit_time[i] = None
-
-def dfs(graph,v):
-    if finished: #allow for search termination
-        return
-    discovered[v] = True
-    time = time + 1
-    entry_time[v] = time
-
-    process_vertex_early_dfs(v)
-
-    p = graph.edges[v]
-    while p != None:
-        y = p.y
-        if discovered[y] == False:
-            parent[y] = v
-            process_edge_dfs(v,y)
-            dfs(graph,y)
-        elif not processed[y] or graph.directed:
-            process_edge_dfs(v,y)
-        if finished:
-            return
-        p = p.next
-
-    process_vertex_late_dfs(v)
-
-    time = time +1
-    exit_time[v] = time
-
-    processed[v] = True
 
 def main():
     graph = Graph()
     read_graph(graph, False)
     print_graph(graph)
+
+    # BFS and applications
+    print "\nStarting BFS methods\n"
     start = 1
     end = 4
     initialize_bfs_search(graph)
@@ -237,7 +199,6 @@ def main():
 
     print "Find connected components"
     connected_components(graph)
-
 
 if __name__ == "__main__":
     main()
