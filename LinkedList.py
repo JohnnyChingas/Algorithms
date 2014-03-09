@@ -34,6 +34,41 @@ class Node:
             head = next
         return last
     
+
+    def delete(self,data):
+        if self.data == data:
+            return self.next
+        else:
+            head = self
+            n = self
+            flag = 0
+            while n.next != None:
+                if n.next.data == data:
+                    n.next = n.next.next
+                    n = n.next
+                    flag = 1
+                else:
+                    n = n.next
+            if not flag:
+                print "Element not found"
+            return head
+
+
+def remove_duplicates(linked_list):
+    if isinstance(linked_list,Node):
+        prev = linked_list
+        htable = {}
+        n = prev.next
+        htable[prev.data] = None
+        while n != None:
+            if n.data in htable:
+                prev.next = n.next
+                n = n.next
+            else:
+                htable[n.data] = None
+                prev = n
+                n = n.next
+
     #Write function that reverses a linked list using recursion
 
 
